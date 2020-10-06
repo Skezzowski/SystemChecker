@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Row, Col, Container } from "react-bootstrap";
+import Loader from "react-loader-spinner";
 
 import { CpuInfo, RamInfo } from "./PartCards";
 
@@ -33,7 +34,15 @@ export default class SystemInfo extends Component {
   render() {
     const { cpuData, ramData } = this.state;
     if (!cpuData || !ramData) {
-      return <div></div>;
+      return (
+        <Loader
+          style={{ position: "fixed", top: "50%", left: "50%" }}
+          type="Bars"
+          color="#00BFFF"
+          height={80}
+          width={80}
+        />
+      );
     }
     return (
       <div>
