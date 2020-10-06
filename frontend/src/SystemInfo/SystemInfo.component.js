@@ -8,10 +8,10 @@ export default class SystemInfo extends Component {
 
   constructor() {
     super();
-    this.refreshState = this.refreshState.bind(this);
+    this.refreshPartsData = this.refreshPartsData.bind(this);
   }
 
-  refreshState() {
+  refreshPartsData() {
     electron.ipcRenderer.invoke("GetCpuData").then((data) => {
       this.setState({ cpuData: data });
     });
@@ -21,7 +21,7 @@ export default class SystemInfo extends Component {
   }
 
   componentDidMount() {
-    this.timerId = setInterval(this.refreshState, 1000);
+    this.timerId = setInterval(this.refreshPartsData, 1000);
   }
 
   componentWillUnmount() {

@@ -52,15 +52,22 @@ app.on("activate", () => {
 });
 
 ipcMain.handle("GetCpuData", async (event, arg) => {
-  const cpu = await si.cpu();
+  const cpuBase = await si.cpu();
   const cpuTemp = await si.cpuTemperature();
-  const currentLoad = await si.currentLoad();
-  const result = { ...cpu, temp: cpuTemp, currentSpeed: currentLoad };
+  const cpuLoad = await si.currentLoad();
+  const result = {
+    manufacturer: cpuBase.manufacturer,
+    brand: cpuBase.brand,
+    speed: cpuBase.speed,
+    physicalCores: cpuBase.physicalCores,
+    temp: cpuTemp.main,
+    currentLoad: cpuLoad.currentload,
+  };
 
   return result;
 });
 
 ipcMain.handle("GetRamData", async (event, arg) => {
   const result = await si.mem();
-  return result;
+  return { total: result.total, used: result.used };
 });
