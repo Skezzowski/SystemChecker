@@ -4,12 +4,12 @@ import ListGroup from "react-bootstrap/ListGroup";
 import React from "react";
 import { formatBytes } from "../Utils";
 
-const infoCardWidth = "20rem";
+import "./PartCards.css";
 
 export const CpuInfo = (props) => {
   const isTempMissing = props.cpuData.temp === -1;
   return (
-    <Card style={{ width: infoCardWidth }}>
+    <Card>
       <Card.Img variant="top" src="cpu.jpg" />
       <Card.Body>
         <Card.Title>CPU Info</Card.Title>
@@ -39,7 +39,7 @@ export const CpuInfo = (props) => {
 
 export const RamInfo = (props) => {
   return (
-    <Card style={{ width: infoCardWidth }}>
+    <Card>
       <Card.Img variant="top" src="ram.jpg" />
       <Card.Body>
         <Card.Title>Ram Info</Card.Title>

@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Row, Col, Container } from "react-bootstrap";
+
 import { CpuInfo, RamInfo } from "./PartCards";
 
 const electron = window.require("electron");
@@ -35,8 +37,18 @@ export default class SystemInfo extends Component {
     }
     return (
       <div>
-        <CpuInfo cpuData={cpuData}></CpuInfo>
-        <RamInfo ramData={ramData}></RamInfo>
+        <Container>
+          <Row>
+            <Col sm>
+              {" "}
+              <CpuInfo cpuData={cpuData}></CpuInfo>
+            </Col>
+            <Col sm>
+              {" "}
+              <RamInfo ramData={ramData}></RamInfo>
+            </Col>
+          </Row>
+        </Container>
       </div>
     );
   }
