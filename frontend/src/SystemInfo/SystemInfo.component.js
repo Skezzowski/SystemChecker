@@ -45,20 +45,16 @@ export default class SystemInfo extends Component {
       );
     }
     return (
-      <div>
-        <Container>
-          <Row>
-            <Col sm>
-              {" "}
-              <CpuInfo cpuData={cpuData}></CpuInfo>
-            </Col>
-            <Col sm>
-              {" "}
-              <RamInfo ramData={ramData}></RamInfo>
-            </Col>
-          </Row>
-        </Container>
-      </div>
+      <Container>
+        <Row>
+          <Col sm>
+            <CpuInfo cpuData={cpuData}></CpuInfo>
+          </Col>
+          <Col sm>
+            <RamInfo ramData={ramData}></RamInfo>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }
