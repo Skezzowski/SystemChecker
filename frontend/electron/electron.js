@@ -1,7 +1,9 @@
 const path = require("path");
 
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, ipcMain } = require("electron");
 const isDev = require("electron-is-dev");
+const os = require("os");
+const si = require("systeminformation");
 
 function createWindow() {
   // Create the browser window.
@@ -9,8 +11,8 @@ function createWindow() {
     width: 800,
     height: 600,
     webPreferences: {
-      nodeIntegration: true
-    }
+      nodeIntegration: true,
+    },
   });
 
   // and load the index.html of the app.
@@ -47,4 +49,18 @@ app.on("activate", () => {
   if (BrowserWindow.getAllWindows().length === 0) {
     createWindow();
   }
+});
+
+ipcMain.handle("GetCpuData", async (event, arg) => {
+  const cpu = await si.cpu();
+  const cpuTemp = await si.cpuTemperature();
+  const currentLoad = await si.currentLoad();
+  const result = { ...cpu, temp: cpuTemp, currentSpeed: currentLoad };
+
+  return result;
+});
+
+ipcMain.handle("GetRamData", async (event, arg) => {
+  const result = await si.mem();
+  return result;
 });
