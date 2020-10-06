@@ -2,15 +2,15 @@ import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 
 import React from "react";
+import { formatBytes } from "../Utils";
 
 export const CpuInfo = (props) => {
   const isTempMissing = props.cpuData.temp.main === -1;
-  console.log(props.cpuData);
   return (
     <Card style={{ width: "20rem" }}>
       <Card.Img variant="top" src="cpu.jpg" />
       <Card.Body>
-        <Card.Title>Cpu</Card.Title>
+        <Card.Title>CPU Info</Card.Title>
         <ListGroup variant="flush">
           <ListGroup.Item>
             Model:{" "}
@@ -38,5 +38,23 @@ export const CpuInfo = (props) => {
 };
 
 export const RamInfo = (props) => {
-  return <p>{props.ramData.used}</p>;
+  console.log(props.ramData);
+  return (
+    <Card style={{ width: "20rem" }}>
+      <Card.Img variant="top" src="ram.jpg" />
+      <Card.Body>
+        <Card.Title>Ram Info</Card.Title>
+        <ListGroup variant="flush">
+          <ListGroup.Item>
+            Total: {formatBytes(props.ramData.total, 0)}
+          </ListGroup.Item>
+          <ListGroup.Item>
+            Used: {formatBytes(props.ramData.used, 2)} (
+            {((props.ramData.used / props.ramData.total) * 100).toFixed(2)}%)
+          </ListGroup.Item>
+          <ListGroup.Item></ListGroup.Item>
+        </ListGroup>
+      </Card.Body>
+    </Card>
+  );
 };
