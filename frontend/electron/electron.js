@@ -2,7 +2,6 @@ const path = require("path");
 
 const { app, BrowserWindow, ipcMain } = require("electron");
 const isDev = require("electron-is-dev");
-const os = require("os");
 const si = require("systeminformation");
 
 function createWindow() {
@@ -10,6 +9,8 @@ function createWindow() {
   const win = new BrowserWindow({
     width: 800,
     height: 600,
+    frame: true,
+    autoHideMenuBar: true,
     webPreferences: {
       nodeIntegration: true,
     },
@@ -51,23 +52,38 @@ app.on("activate", () => {
   }
 });
 
-ipcMain.handle("GetCpuData", async (event, arg) => {
+ipcMain.handle("GetCpuBaseData", async () => {
   const cpuBase = await si.cpu();
-  const cpuTemp = await si.cpuTemperature();
-  const cpuLoad = await si.currentLoad();
   const result = {
     manufacturer: cpuBase.manufacturer,
     brand: cpuBase.brand,
     speed: cpuBase.speed,
     physicalCores: cpuBase.physicalCores,
-    temp: cpuTemp.main,
-    currentLoad: cpuLoad.currentload,
   };
 
   return result;
 });
 
-ipcMain.handle("GetRamData", async (event, arg) => {
+ipcMain.handle("GetRamBaseData", async () => {
   const result = await si.mem();
-  return { total: result.total, used: result.used };
+  return { total: result.total };
+});
+
+ipcMain.handle("GetGPUBaseData", async () => {
+  const gpuData = await si.graphics();
+  return gpuData;
+});
+
+ipcMain.handle("GetChangingData", async () => {
+  const cpuTemp = await si.cpuTemperature();
+  const cpuLoad = await si.currentLoad();
+  const cpuData = {
+    temp: cpuTemp.main,
+    currentLoad: cpuLoad.currentload,
+  };
+
+  const ramDataRaw = await si.mem();
+  const ramData = { total: ramDataRaw.total, used: ramDataRaw.used };
+
+  return { ramData: ramData, cpuData: cpuData };
 });
