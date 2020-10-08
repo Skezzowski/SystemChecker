@@ -19,7 +19,6 @@ router.route("/data").post((req, res) => {
     cpuLoad: req.body.cpuData.currentLoad,
     ramUsage: req.body.ramData.used,
   });
-  console.log(req.body);
   pcData
     .save()
     .then((_) => res.status(200).json({ msg: "Data saved" }))
@@ -31,8 +30,8 @@ router.route("/data").post((req, res) => {
 
 router.route("/data").get((req, res) => {
   let numberOfDataNeeded = 0;
-  if (req.query && req.query.numberofdata) {
-    numberOfDataNeeded = Number.parseInt(req.query.numberofdata?.toString());
+  if (req.query && req.query.numberOfData) {
+    numberOfDataNeeded = Number.parseInt(req.query.numberOfData?.toString());
   }
 
   pcDataModel

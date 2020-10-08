@@ -6,15 +6,17 @@ import { sendSystemData } from "./AppAPI";
 import SystemInfo from "./SystemInfo/SystemInfo.component";
 import SystemInfoPast from "./SystemInfoPast/SystemInfoPast";
 
+import "./App.css";
+
 const electron = window.require("electron");
 
 export default class App extends Component {
-  state = { loaded: false };
+  state = { loaded: false, ramData: {}, cpuData: {}, gpuData: {} };
 
   constructor() {
     super();
     this.initState = this.initState.bind(this);
-    this.refreshPartsData = this.refreshPartsData.bind(this);
+    this.refreshPartsChangingData = this.refreshPartsChangingData.bind(this);
   }
 
   initState() {
@@ -47,7 +49,7 @@ export default class App extends Component {
     this.refreshIntervalId = setInterval(this.refreshPartsChangingData, 1000);
     this.sendDataIntervalId = setInterval(
       () => sendSystemData(this.state).catch((error) => {}),
-      5000
+      50000
     );
   }
 
@@ -82,7 +84,7 @@ export default class App extends Component {
           <Route
             path="/past"
             render={(props) => (
-              <SystemInfoPast {...props} pcInfo={this.state} />
+              <SystemInfoPast {...props} totalRam={this.state.ramData.total} />
             )}
           />
         </div>

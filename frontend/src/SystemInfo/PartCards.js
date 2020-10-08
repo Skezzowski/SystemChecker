@@ -4,8 +4,6 @@ import ListGroup from "react-bootstrap/ListGroup";
 import React from "react";
 import { formatBytes, MBtoB } from "../Utils";
 
-import "./PartCards.css";
-
 export const CpuInfo = (props) => {
   const isTempMissing = props.cpuData.temp === -1;
   return (
