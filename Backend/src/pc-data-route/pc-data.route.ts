@@ -31,14 +31,25 @@ router.route("/data").post((req, res) => {
 
 router.route("/data").get((req, res) => {
   let numberOfDataNeeded = 0;
-  if (req.query && req.query.username) {
-    numberOfDataNeeded = (req.query as any).data;
+  if (req.query && req.query.numberofdata) {
+    numberOfDataNeeded = Number.parseInt(req.query.numberofdata?.toString());
   }
+
   pcDataModel
     .find()
     .sort("-createdAt")
     .limit(numberOfDataNeeded)
-    .then((data) => res.status(200).json(data));
+    .then((result) => {
+      const response = result.map((r) => {
+        return {
+          cpuLoad: r.cpuLoad,
+          cpuTemp: r.cpuTemp,
+          ramUsed: r.ramUsage,
+        };
+      });
+
+      res.status(200).json(response);
+    });
 });
 
 module.exports = router;
