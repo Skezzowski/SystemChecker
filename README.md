@@ -2,7 +2,8 @@
 
 Schoolproject for SZTE Msc
 
-Scripts:
+Scripts on Backend:
+
 npm run dev:
 watches the project, server restarts on file change
 
