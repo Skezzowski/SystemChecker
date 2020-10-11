@@ -8,7 +8,7 @@
     "dev": "nodemon",
     "prod": "ts-node ./src/server.ts",
     "build": "tsc",
-    "build-prod": "tsc && node build/server.js"
+    "build-start": "tsc && node build/server.js"
   },
   "author": "",
   "license": "ISC",

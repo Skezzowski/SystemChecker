@@ -1,17 +1,15 @@
 # SystemChecker
 
-Schoolproject for SZTE Msc
+Schoolproject made at University of Szeged
 
-Scripts on Backend:
+### Used technologies:
 
-npm run dev:
-watches the project, server restarts on file change
+- React
+- Electron
+- NodeJS
 
-npm run prod:
-starts server without build
+### What is it about?
 
-npm run build
-compiles the ts files to js
+The application shows data about your computer system and safes it to the backend periodically. With the saved data, a graph can be drawn on the 'History' page.
 
-npm run build-prod:
-Compiles the ts files to js, then starts the server
+Further information about the starting scripts are in the subfolders.
