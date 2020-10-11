@@ -4,6 +4,14 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+### `npm run dev-win`
+
+Runs app in development mode on windows. App restarts on code change
+
+### `npm run package`
+
+Creates an exe file from the source. Packages the application.
+
 ### `npm start`
 
 Runs the app in the development mode.<br />
