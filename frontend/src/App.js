@@ -49,7 +49,7 @@ export default class App extends Component {
     this.refreshIntervalId = setInterval(this.refreshPartsChangingData, 1000);
     this.sendDataIntervalId = setInterval(
       () => sendSystemData(this.state).catch((error) => {}),
-      50000
+      60000  // send data with 1 minute interval
     );
   }
 
